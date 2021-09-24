@@ -8,7 +8,11 @@ import java.util.List;
 public class Hand {
     private List<Card> cards = new ArrayList<>();
     private int bet = 0;
-    //private Player player;
+    private Actor holder;
+
+    public Hand(Actor holder) {
+        this.holder = holder;
+    }
 
     public void addCard(Card card) {
         cards.add(card);
@@ -23,11 +27,12 @@ public class Hand {
         return output.toString().trim();
     }
 
-    public String displayValue() {
+    public int getValue() {
         int score = 0;
         boolean hasAce11 = false;
         for (Card card : cards) {
             int value = card.getValue();
+
             switch (value) {
                 case 1 -> {
                     value = score + 11 > 21 ? 1 : 11;
@@ -44,6 +49,15 @@ public class Hand {
                 hasAce11 = false;
             }
         }
-        return Integer.toString(score);
+        return score;
     }
+
+    //getting composition methods
+    //getter with no setter
+    //pass through method
+
+    public byte getAction() {
+        return holder.getAction(this);
+    }
+
 }

@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.Utils.Console;
+import com.company.cardGame.actor.Dealer;
+import com.company.cardGame.actor.Player;
+import com.company.cardGame.blackJack.Actor;
 import com.company.cardGame.blackJack.Hand;
 import com.company.cardGame.deck.CheatersDeck;
 import com.company.cardGame.deck.Deck;
@@ -11,16 +15,14 @@ public class Main {
 	// write your code here
         Deck deck = new StandardDeck();
         deck.shuffle();
-        Hand myHand = new Hand();
+        Actor dealer = new Player(Console.getString("Player name?", true));
+        Hand myHand = new Hand(dealer);
         myHand.addCard(deck.draw());
         myHand.addCard(deck.draw());
-        System.out.println(myHand.displayHand());
-        System.out.println(myHand.displayValue());
-//
-//        HiLowGame game = new HiLowGame();
-//
-//        while (true) {
-//            game.playGame();
-//        }
+        while(myHand.getAction() == Actor.HIT) {
+            myHand.addCard(deck.draw());
+            System.out.println("HIT");
+        }
+        System.out.println("Done");
     }
 }
