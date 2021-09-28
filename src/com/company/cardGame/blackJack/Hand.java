@@ -31,7 +31,7 @@ public class Hand {
         int score = 0;
         boolean hasAce11 = false;
         for (Card card : cards) {
-            int value = card.getValue();
+            int value = card.getRank();
 
             switch (value) {
                 case 1 -> {
@@ -58,6 +58,14 @@ public class Hand {
 
     public byte getAction() {
         return holder.getAction(this);
+    }
+
+    public int size() { return cards.size(); }
+
+    public int getBet() { return bet; }
+
+    public boolean canSplit() {
+        return cards.get(0).getRank() == cards.get(1).getRank();
     }
 
 }

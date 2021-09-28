@@ -22,7 +22,7 @@ public class HiLowGame {
         System.out.println(card2.display());
 
         if (input.equalsIgnoreCase("h")) {
-            if (card1.getValue() < card2.getValue()) {
+            if (card1.getRank() < card2.getRank()) {
                 System.out.println("Winner");
             }
             else {
@@ -31,7 +31,7 @@ public class HiLowGame {
 
         }
         if (input.equalsIgnoreCase("l")) {
-            if (card1.getValue() > card2.getValue()) {
+            if (card1.getRank() > card2.getRank()) {
                 System.out.println("Winner");
             }
             else {
