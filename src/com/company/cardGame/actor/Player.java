@@ -20,7 +20,7 @@ public class Player implements Actor {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
@@ -29,19 +29,20 @@ public class Player implements Actor {
     }
 
     @Override
-    public int getBet() {
-        return Console.getInt("Enter a bet between 1 and " + balance, 1,
+    public int placeBet() {
+        int bet = Console.getInt(
+                "Enter a bet bewtween 1 and " + balance, 1,
                 balance,
-                "Invalid bet"
+                "invalid bet"
         );
+        balance -= bet;
+        return bet;
     }
 
     public String getAvailableActions(Hand hand) {
         actionsCount = 2;
         StringBuilder output = new StringBuilder();
         output.append("0. Quit\n1. Hit\n2. Stand");
-        //TODO: add logic for double
-        //TODO: 1 confirm first turn
         if (hand.size() == 2 && balance >= hand.getBet()) {
             output.append("\n3. Double");
             actionsCount++;
@@ -51,8 +52,6 @@ public class Player implements Actor {
             }
 
         }
-        //TODO: 2 Confirm enough funds
-        //TODO: 3 add logic for split detect pair
         return output.toString();
     }
 
@@ -62,5 +61,9 @@ public class Player implements Actor {
         System.out.println(hand.displayHand());
         System.out.println(hand.getValue());
         return (byte) Console.getInt(getAvailableActions(hand), 0, actionsCount, "Invalid action");
+    }
+
+    public void addBalance (int amt) {
+        balance += amt;
     }
 }
