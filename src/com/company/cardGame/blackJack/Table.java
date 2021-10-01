@@ -10,14 +10,14 @@ import java.util.List;
 
 public class Table {
     //TODO: remove this item.
-    Hand player = new Hand(new Player("Player"));
+    Hand player = new Hand(new Player("Sergio"));
     //TODO: Try to implement multiple hands.
     List<Hand> hands = new ArrayList<>();
     //TODO: More comfortable -> try to accomplish without the players list.
     List<Actor> players = new ArrayList<>();
     Hand dealer = new Hand(new Dealer());
     Deck deck;
-    int BUST_VALUE = 21;
+    public static final int BUST_VALUE = 21;
 
     public void playRound() {
         deck = new StandardDeck();
@@ -43,7 +43,7 @@ public class Table {
 
     private void displayTable() {
         StringBuilder output = new StringBuilder();
-        output.append("Dealer: ").append(dealer.displayHand()).append("\n");
+        output.append(dealer.getName()).append(": ").append(dealer.displayHand()).append("\n");
         output.append("Player: ").append(player.displayHand());
         System.out.println(output);
     }
@@ -58,11 +58,11 @@ public class Table {
 
     private void determineWinner() {
         if (player.getValue() > BUST_VALUE) {
-            System.out.println("Player Busted");
+            System.out.println(player.getName() + " Busted");
             return;
         }
         if (player.getValue() > dealer.getValue() || dealer.getValue() > BUST_VALUE) {
-            System.out.println("Player Wins");
+            System.out.println(player.getName() + " Wins");
             player.payout(Hand.PUSHPAY);
             return;
         }
@@ -70,7 +70,7 @@ public class Table {
     }
 
     private boolean turn(Hand activeHand) {
-        System.out.println("Dealer: " + dealer.displayHand());
+        System.out.println(dealer.getName() + ": " + dealer.displayHand());
         byte action = activeHand.getAction();
         return switch (action) {
             case Actor.QUIT -> stand(activeHand);

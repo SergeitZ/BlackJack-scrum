@@ -31,7 +31,7 @@ public class Player implements Actor {
     @Override
     public int placeBet() {
         int bet = Console.getInt(
-                "Enter a bet bewtween 1 and " + balance, 1,
+                "Enter a bet between 1 and " + balance, 1,
                 balance,
                 "invalid bet"
         );
@@ -50,7 +50,6 @@ public class Player implements Actor {
                 output.append("\n4. Split");
                 actionsCount++;
             }
-
         }
         return output.toString();
     }
