@@ -3,6 +3,7 @@ package com.company.cardGame.deck;
 public class Card {
     private int rank;
     private String suit;
+    private boolean isFaceDown = true;
 
     public Card(int rank, String suit) {
         this.rank = rank;
@@ -13,6 +14,9 @@ public class Card {
 
     public String display() {
         String output;
+        if (isFaceDown) {
+            return "<*>";
+        }
         switch(rank) {
             case 1 -> output = "AC";
             case 11 -> output = "JA";

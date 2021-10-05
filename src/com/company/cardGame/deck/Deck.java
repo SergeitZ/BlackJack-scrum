@@ -4,4 +4,5 @@ public interface Deck {
 
     void shuffle();
     Card draw();
+    Card flipDraw();
 }
