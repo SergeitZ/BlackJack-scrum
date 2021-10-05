@@ -30,7 +30,7 @@ public class Sergio implements Actor {
     }
 
     @Override
-    public byte getAction(Hand hand) {
+    public byte getAction(Hand hand, int dealer) {
         return 0;
     }
 

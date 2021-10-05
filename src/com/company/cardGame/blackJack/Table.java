@@ -45,10 +45,11 @@ public class Table {
         getBets();
         deal();
         displayTable();
-       playerTurns();
-       while (turn(dealer));
-       displayTable();
-       endRound();
+        playerTurns();
+        dealer.revealHand();
+        while (turn(dealer));
+        displayTable();
+        endRound();
     }
 
     public void getBets() {
@@ -60,6 +61,7 @@ public class Table {
     private void playerTurns() {
         for (int count = 0; count < hands.size(); count++) {
             Hand player = hands.get(count);
+            player.revealHand();
             while (true) {
                 if(!turn(player)) break;
             }
@@ -72,7 +74,9 @@ public class Table {
         for (Hand player : hands) {
             determineWinner(player);
             System.out.println(player.getBalance());
+            player.discardHand();
         }
+        dealer.discardHand();
         while (hands.size() > playerCount) {
             hands.remove(hands.size() - 1);
         }
@@ -90,9 +94,9 @@ public class Table {
     public void deal() {
         for (int count = 0; count < 2; count++) {
             // list of hands
-            dealer.addCard(deck.draw());
+            dealer.addCard(count == 0 ? deck.draw() : deck.flipDraw());
             for (Hand player : hands) {
-                player.addCard(deck.draw());
+                player.addCard(count == 0 ? deck.draw() : deck.flipDraw());
             }
         }
     }
@@ -117,7 +121,7 @@ public class Table {
 
     private boolean turn(Hand activeHand) {
         System.out.println(dealer.getName() + ": " + dealer.displayHand());
-        byte action = activeHand.getAction();
+        byte action = activeHand.getAction(dealer.getShowRank());
         return switch (action) {
             case Actor.QUIT -> quit();
             case Actor.HIT ->  hit(activeHand);

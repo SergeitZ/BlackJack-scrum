@@ -1,14 +1,6 @@
 package com.company;
 
-import com.company.Utils.Console;
-import com.company.cardGame.actor.Dealer;
-import com.company.cardGame.actor.Player;
-import com.company.cardGame.blackJack.Actor;
-import com.company.cardGame.blackJack.Hand;
 import com.company.cardGame.blackJack.Table;
-import com.company.cardGame.deck.CheatersDeck;
-import com.company.cardGame.deck.Deck;
-import com.company.cardGame.deck.StandardDeck;
 
 public class Main {
 

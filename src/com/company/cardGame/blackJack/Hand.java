@@ -60,8 +60,8 @@ public class Hand {
     //getter with no setter
     //pass through method
 
-    public byte getAction() {
-        return holder.getAction(this);
+    public byte getAction(int dealer) {
+        return holder.getAction(this, dealer);
     }
 
     public int size() { return cards.size(); }
@@ -106,6 +106,22 @@ public class Hand {
         hand.addCard(cards.remove(1));
         hand.bet = bet;
         return hand;
+    }
+
+    public void revealHand() {
+        for (Card card : cards) {
+            if (card.getIsFaceDown()) {
+                card.flip();
+            }
+        }
+    }
+
+    public void discardHand() {
+        cards.clear();
+    }
+
+    public int getShowRank() {
+        return cards.get(1).getRank();
     }
 
 }

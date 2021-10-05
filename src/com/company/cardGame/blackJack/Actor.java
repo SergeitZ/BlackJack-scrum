@@ -11,7 +11,7 @@ public interface Actor {
     String getName();
     int getBalance();
     int placeBet();
-    byte getAction(Hand hand);
+    byte getAction(Hand hand, int dealerRank);
     void addBalance(int amt);
     //byte getAction(Hand hand, List<Card> cards) -> card counter version
 }
